@@ -18,8 +18,15 @@ jobs:
       run: |
         pdflatex main.tex
 
-    - name: Upload compiled PDF
-      uses: actions/upload-artifact@v2
-      with:
-        name: document
-        path: main.pdf
+    - name: Move compiled PDF to docs directory
+      run: |
+        mkdir -p docs
+        mv main.pdf docs/index.pdf
+
+    - name: Commit and push the PDF to main branch
+      run: |
+        git config --global user.name "github-actions[bot]"
+        git config --global user.email "github-actions[bot]@users.noreply.github.com"
+        git add docs/index.pdf
+        git commit -m "Publish compiled PDF to docs directory"
+        git push origin main
