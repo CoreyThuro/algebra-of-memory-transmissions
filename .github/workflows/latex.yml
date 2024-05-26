@@ -10,19 +10,23 @@ jobs:
     - name: Checkout repository
       uses: actions/checkout@v2
 
+    - name: Create .nojekyll file
+      run: |
+        touch .nojekyll
+
     - name: Set up TeX Live
       run: |
         sudo apt-get update
-        sudo apt-get install -y texlive-latex-base texlive-latex-recommended texlive-latex-extra texlive-fonts-recommended texlive-publishers
+        sudo apt-get install -y texlive-full
+        sudo apt-get install -y texlive-latex-extra texlive-science texlive-publishers
 
     - name: Compile LaTeX document
       run: |
         pdflatex main.tex
 
-    - name: Move compiled PDF to root directory and create .nojekyll file
+    - name: Move compiled PDF to root directory
       run: |
         mv main.pdf index.pdf
-        touch .nojekyll
 
     - name: Commit and push the PDF to main branch
       run: |
