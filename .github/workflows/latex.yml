@@ -1,51 +1,40 @@
-name: Compile LaTeX and Deploy PDF
+name: Compile LaTeX document
 
-on:
-  push:
-    branches:
-      - main
-  pull_request:
-    branches:
-      - main
+on: [push, pull_request]
 
 jobs:
   build:
     runs-on: ubuntu-latest
 
     steps:
-    - name: Checkout repository
-      uses: actions/checkout@v2
+    - uses: actions/checkout@v2
 
-    - name: Create .nojekyll file
+    - name: Copy Quiver package
       run: |
-        touch .nojekyll
+        sudo mkdir -p /usr/share/texlive/texmf-dist/tex/latex/quiver
+        sudo cp quiver.sty /usr/share/texlive/texmf-dist/tex/latex/quiver/
+        sudo texhash
 
     - name: Set up TeX Live
       run: |
         sudo apt-get update
         sudo apt-get install -y texlive-full
 
-    - name: Install Quiver package
-      run: |
-        wget http://mirrors.ctan.org/macros/latex/contrib/quiver/quiver.sty
-        sudo mkdir -p /usr/share/texlive/texmf-dist/tex/latex/quiver
-        sudo mv quiver.sty /usr/share/texlive/texmf-dist/tex/latex/quiver/
-        sudo texhash
-
     - name: Compile LaTeX document
       run: |
         pdflatex main.tex
 
-    - name: Deploy to GitHub Pages
+    - name: Move compiled PDF to root directory and create .nojekyll file
+      run: |
+        mv main.pdf index.pdf
+        touch .nojekyll
+
+    - name: Commit and push the PDF to main branch
       env:
-        GH_PAGES_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       run: |
         git config --global user.name "github-actions[bot]"
         git config --global user.email "github-actions[bot]@users.noreply.github.com"
-        git clone --depth=1 --branch=gh-pages https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }} gh-pages
-        cp main.pdf gh-pages/index.pdf
-        cp .nojekyll gh-pages/.nojekyll
-        cd gh-pages
         git add index.pdf .nojekyll
-        git commit -m "Deploy PDF from GitHub Actions"
-        git push origin gh-pages
+        git commit -m "Publish compiled PDF to root directory"
+        git push origin main
