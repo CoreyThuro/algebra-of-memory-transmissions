@@ -2,6 +2,9 @@ name: Compile LaTeX document
 
 on: [push, pull_request]
 
+permissions:
+  contents: write  # Explicitly grant write permissions to the workflow
+
 jobs:
   build:
     runs-on: ubuntu-latest
