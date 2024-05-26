@@ -1,0 +1,287 @@
+\documentclass{article}
+\usepackage{amsmath}
+\usepackage{amssymb} % for \Diamond command
+\usepackage{quiver}
+\usepackage{adjustbox} % for centering content
+\usepackage{hyperref}
+
+\begin{document}
+
+\begin{center}
+    {\Large\bfseries The Algebra of Memory Transmissions}\\ 
+    \vspace{.5em}
+    \normalsize Corey Thuro
+
+
+\vspace{1em}
+
+% https://q.uiver.app/#q=WzAsNSxbMSwwLCJBIl0sWzMsMCwiQiJdLFs1LDAsIkIiXSxbMCwwLCJ0X24gOiJdLFs2LDAsIjogdF9uIl0sWzEsMiwiZShCKT1tZW1fYSIsMCx7ImN1cnZlIjotMn1dLFswLDEsIm1lbV9hIiwwLHsic3R5bGUiOnsiYm9keSI6eyJuYW1lIjoiZG90dGVkIn19fV0sWzIsMSwiZShCKT1tZW1fYSIsMCx7ImN1cnZlIjotMn1dXQ==
+\[
+t_n
+\begin{pmatrix}
+\begin{tikzcd}
+    personA && 
+    personB \arrow[loop, distance=2em, "{A(mem_a)}" , out=135, in=45] {}
+    \arrow["{mem_a}", dotted, from=1-1, to=1-3]
+\end{tikzcd}
+\end{pmatrix}
+t_{n+x}
+\]
+\end{center}
+
+\subsection*{Introduction}
+The biologist Michael Levin has suggested the possibility of transferring memories between organisms [1]. As of 2024, the evolution of this possibility into the form in which it is imagined here remains science fiction, but we will construct a ``thought experiment" around it anyway. Scare quotes because this work will combine the imaginative with logic; however, our aims are aesthetic or recreational rather than scientific or philosophical. A logic/sci-fi mash up.
+
+\subsection*{Preliminaries}
+Assume that science has reached the point at which a form of Levin's prediction has come to fruition. Technology exists which allows for the transfer of memories between (human) organisms. Assume also that the problem of the receiver decoding the transplanted memories has been solved so that two subjects can transmit memories to each other on command and integrate them into their respective experiences more or less seamlessly. Our subjects have control over which memories to send, so that A can send B a memory from 10 minutes ago or 10 seconds ago or from any other time. Each subject also has control over the duration of the memory sent, so that B might send A a 5 second memory from 10 minutes ago. The machinery of the memory transfer system is light and unnoticeable so that one is able to be plugged into it and go about one's life as usual. We stipulate that any transplant memory $m$ comprises (at least) the following phenomenological components:
+
+\begin{itemize}
+    \item Visual imagery, such as that of a daydream
+    \item Forgetfulness or disassociation regarding one's present existence for the duration of the memory (i.e., lack of self-awareness)
+    \item Contextual beliefs (i.e., beliefs which would have been present during the experience being remembered)
+\end{itemize}
+
+Then transmitted memories have a level of dissociative intensity to them, as in the case of a daydream. When the experienced transmitted memory is over, there is a brief moment in which the subject must readjust to their self (as when waking from an intense dream and realizing it was just a dream).
+
+\subsection*{States of the memory transfer system}
+The memory transfer system has two memory transfer states: discrete and continuous. If the machine is set to continuous then the receiving subject will receive an unceasing flow of the other subject's memories, otherwise transmitted memories will be singular. We denote the continuous state with the zig-zag arrow \\ \[\begin{tikzcd}
+	\textcolor{white}{\bullet} &&& \textcolor{white}{\bullet}
+	\arrow[squiggly, from=1-1, to=1-4]
+\end{tikzcd}\] and the discrete state with the dotted arrow
+\\
+\[\begin{tikzcd}
+	\textcolor{white}{\bullet} &&& \textcolor{white}{\bullet}
+	\arrow[dotted, from=1-1, to=1-4]
+\end{tikzcd}\]
+
+\subsection*{Elements}
+The algebra of memory transmissions is built up from a few primitive elements: 
+\begin{enumerate}
+    \item subjects
+    \item memories
+    \item transmissions
+    \item experiences
+\end{enumerate}Our domain of discourse shall be defined as the vernacular understanding you the reader possess of words such as "subject", "memory", "transmission", "experience", or any other concepts (eg. passing time) relevant to this exercise. If one wished, one could formulate a conception of subjects, memories as elements of distinct sets (or objects in a category) and transmissions, experiences as morphisms. But this is not an exercise in axiomatic set (or category) theory. The serious mathematician will find our foundations inadequate but it isn't a problem for us if this exercise does not hold up to the standards of pure mathematics, because we aren't working under the pretense that this is an exercise in pure mathematics.\footnote{Anyway, most working mathematicians don't know or care about foundations, and that doesn't stop them!}
+
+\subsection*{The Precedence Relation}
+In establishing our axioms we rely on notation and concepts from temporal logic such as precedence. The precedence relation will be denoted $\prec$ so that given propositions (R, X), the statement $R \prec X$ should be read as ``The instant at which R precedes the instant at which X." The following are some normal properties of the precedence relation:
+
+\begin{itemize}
+    \item Reflexivity: $R \prec R$
+    \item Transitivity: $((R \prec X) \land (X \prec Y)) \Rightarrow (R \prec Y)$
+    \item Anti-symmetry: $(R \prec X) \Rightarrow (X \nprec R)$
+\end{itemize}
+
+We call these properties ``normal" because they are the properties which (Western?) human common sense imputes to the passage of time.\footnote{Reflexivity of time-instants with respect to precedence is arguably not common-sensical.} Notice that taken together, the properties imply that no two distinct instants can occur simultaneously.
+
+
+
+\subsection*{Memory transmission notation}
+If A and B denote our subjects, and $t_i$ an instant in time\footnote{We will think of an instant in time as some real number}, we will denote A's and B's memories of events which occurred at $t_i$ by $A(m_i)$ and $B(m_i)$, respectively. Notice that $A(m_i) \neq B(m_i)$ even though both memories reference events which occurred at $t_i$. To denote that a memory was transmitted at a given time, we prefix the expression with $t_n$ so that \\ 
+
+\[
+t_n
+\begin{pmatrix}
+\begin{tikzcd}
+    A && B 
+    \arrow["{mem_i}", dotted, from=1-1, to=1-3]
+\end{tikzcd}
+\end{pmatrix}
+\]
+
+
+\noindent would be read as follows: \\
+
+At $t_n$, A discretely transmits the memory of an event at $t_i$ to B. \\\\
+If we include some $t_n$ after the final parenthesis (see the image beneath the title) this means that the events inside the parentheses take place in the interval from the outer-left $t_n$ to the outer-right $t_n$. These durations are durations as measured by the imagined subjects. We imagine that $t_n$ corresponds to some specific clock time obserervable by the subjects. If we wish to speak generically of memory transmissions, we will use conventional function notation. For instance, we might speak of a transmission $f: A \rightarrow B$. We denote the experience of a subject A by 
+\[
+\begin{tikzcd}
+    A \arrow[loop, distance=2em, "" , out=135, in=45] {}
+\end{tikzcd}
+\]
+If we wanted to say that A experiences $mem_n$ at $t_q$ we would write: \\
+\[
+t_q
+\begin{pmatrix}
+\begin{tikzcd}
+    A \arrow[loop, distance=2em, "{mem_n}" , out=135, in=45] {}
+\end{tikzcd}
+\end{pmatrix}
+\]
+\\\\
+Finally, if we wish to denote the content of a memory (say, some proposition $f$) we write $f \subseteq A(mem_n)$ to mean ``f is expressed by $A(mem_n)$."
+
+\subsection*{Basic examples of notation}
+\vspace{1em}
+
+      1.  \begin{tikzcd} 
+            A && B 
+            \arrow["{mem_i}", dotted, from=1-1, to=1-3]
+        \end{tikzcd}
+        \\\\Reads: A transmits $mem_i$ to B. \\\\
+
+    \noindent 2.   
+        \begin{tikzcd}
+            B \arrow[loop, distance=2em, "{A(mem_i)}" , out=135, in=45] {}
+        \end{tikzcd}
+        \\\\Reads: B experiences $A(mem_i)$.\\\\
+
+  \noindent 3. 
+        $B(A(mem_i)) = B(mem_k)$ 
+    \\\\Reads: B's memory of $A(mem_i)$ is a distinct memory $B(mem_k)$. \\\\
+
+    
+    \noindent  4.  \(
+        t_n
+             \begin{pmatrix}
+                \begin{tikzcd} 
+                B && A 
+                \arrow["{mem_k}", squiggly, from=1-1, to=1-3]
+                \end{tikzcd} 
+            \end{pmatrix}   
+        t_{n+m}
+        \)
+        \[
+            \parbox{\linewidth}{
+                Reads: B continuously transmits $mem_k$ to A from $t{n}$ to $t_{n+m}$ \\\\
+            }
+        \]
+
+
+
+\subsection*{Axioms}
+\vspace{1em}
+1. Memory transmission is (virtually) instantaneous: 
+\\\\
+    \indent \(
+        t_k
+             \begin{pmatrix}
+                \begin{tikzcd} 
+                    B && A 
+                    \arrow["{mem_q}", dotted, from=1-1, to=1-3]
+                \end{tikzcd} 
+            \end{pmatrix}   
+         \Rightarrow
+        t_{k+1}
+            \begin{pmatrix}
+                \begin{tikzcd} 
+                A \arrow[loop, distance=2em, "{mem_q}" , out=135, in=45] {}
+                \end{tikzcd} 
+            \end{pmatrix}  
+        \)
+    $ 
+    \\\\\\
+       \indent \text{ Where for } \epsilon > 0 \quad ||t_{k+1} - t_k|| < \epsilon 
+    $ 
+    \\\\
+2. Every memory is subject to transmission:
+$ \\\\
+\indent\forall A(mem) \ A(mem) \Rightarrow \lozenge   
+            \begin{pmatrix}
+                \begin{tikzcd} 
+                    A && B 
+                    \arrow["{mem}", dotted, from=1-1, to=1-3]
+                \end{tikzcd}
+                \end{pmatrix} \footnote{We use $\lozenge$ here to informally denote possibility.}
+$\\\\
+3. Every experience becomes a memory:
+$\\\\
+\indent \forall e(B) := \text{experience of B }
+    \exists \ mem_n \text{ such that } \left( e(B) \prec mem_n \right) \land \left( e(B) \subseteq mem_n \right)\footnote{We use e(B) as notation here because LaTeX formatting of the "identity arrow" became unwieldy.}
+$\\\\
+4. Every transmitted memory m is experienced by the receiver: 
+$ \\\\
+\indent t_n
+\begin{pmatrix}
+\begin{tikzcd}
+    A && 
+    B \arrow[loop, distance=2em, "{A(mem_a)}" , out=135, in=45] {}
+    \arrow["{mem_a}", dotted, from=1-1, to=1-3]
+\end{tikzcd}
+\end{pmatrix}
+\\\\$ 
+
+
+\subsection*{Some Theorems}
+
+1. The act of transmitting a memory becomes a memory for the transmitter. (from 2 and 3)\\
+2. The experiencing of a received memory becomes a memory. (from 3)
+
+
+
+\subsection*{Episodes in the algebra of memory transmissions}
+
+\subsubsection*{I. Identity disorientation of subjects}
+
+$\\
+\noindent (1)
+$ $\
+\indent t_{q+1hr}=t_r
+\begin{pmatrix}
+\begin{tikzcd}
+    B && 
+    A \arrow[loop, distance=2em, "{B(mem_q)}" , out=135, in=45] {}
+    \arrow["{mem_q}", dotted, from=1-1, to=1-3]
+\end{tikzcd}
+\end{pmatrix} t_{r+n} \ \text{for any chosen n.}
+\\\\\\$ 
+$\\\\
+\noindent (2)
+\indent t_{(r+n)+17min}=t_s
+\begin{pmatrix}
+\begin{tikzcd}
+    A && 
+    B \arrow[loop, distance=2em, "{A(mem_{(r)})}" , out=135, in=45] {}
+    \arrow["{mem_{r}}", squiggly, from=1-1, to=1-3]
+\end{tikzcd}
+\end{pmatrix} t_s+x \ \text{for any chosen x.}
+\\\\
+$
+\noindent
+(3) Repeat this process until it becomes epistemologically impossible for A and B to meaningfully assert the reality of their distinct identities or the reality of the past/future memory/premonition relation of events.
+
+\paragraph{In English:}\mbox{}\\
+
+\noindent (1) B discretely transmits the memory $mem_q$ to A 1 hour after $t_q$. That is, 1 hour after the event of which $mem_q$ is a memory. A experiences $B(mem_q)$. Recall that during the experience of the memory, A believes that they are B. Then, upon the memory ending, A experiences the brief shock of remembering they are A.
+
+\vspace{1em} % Add some vertical space for readability
+
+\noindent (2) 17 minutes after $t_{r+n}$, for any chosen n, A continuously transmits to B everything from the interval $(t_{r}, t_s+x)$ for any chosen $x$, so that in ``chronological'' order, B experiences: 
+\begin{enumerate}
+    \item transmitting $mem_q$ to A.
+    \item experiencing $B(mem_q)$.
+    \item the brief shock of remembering they are ``actually'' A.
+    \item the brief shock of remembering they are ``actually'' B (after having remembered they are A).
+\end{enumerate} 
+\vspace{1em}
+\noindent This is the most difficult part of the whole exercise so let's try to clarify things with an example.
+\paragraph{Example:}
+Let's give A and B names. We'll call A Rohan, and B Robin. Using the above as reference, let's say at $t_q$ Robin opens a door. Then we have the following order of events:
+\begin{itemize}
+    \item $t_q$: Robin opens the door.
+    \item $t_r$: Robin discretely transmits to Rohan the memory of opening the door.
+    \item $t_s$: Rohan continuously transmits to Robin the memory of everything from $t_r$ to $t_{s}+x$.
+\end{itemize}
+The third bullet means that at $t_s$ Robin's experiences are the following. In ``chronological'' order, starting at $t_s$ Robin experiences:
+\begin{enumerate}
+    \item discretely transmitting to Rohan the memory of opening the door at $t_q$.
+    \item opening the door.
+    \item the brief shock of remembering he is ``actually'' Rohan.
+    \item the brief shock of remembering he is ``actually'' Robin (after having just remembered he is "actually" Rohan).\footnote{The example brings up an important point. It is important that the algebra of memory transmissions not be a blind manipulation of signs. When thinking through some construction one must refer to the preliminaries above and take time to imagine the phenomenological and psychological content of the subjects' experiences.}
+\end{enumerate}
+
+\noindent (3) Repeat this process until it becomes epistemologically impossible for A and B to meaningfully assert the reality of their distinct identities or the reality of the past/future memory/premonition relation of events. 
+
+
+\paragraph{Endnote:} It became clear to me upon giving a talk on this paper that what is actually being transmitted are full experiences whose objective time-position is attributed to the objective past. Integrating aspects of memory, such as its degradation, or thinking about transmitting only the semantic content of memory, are interesting topics for further research. 
+
+
+\subsection*{References}
+\begin{enumerate}
+    \item Levin, M. (2023, November 17). Memory Moves Outside Of The Brain [Video]. YouTube. Retrieved January 16, 2024, from \url{https://www.youtube.com/watch?v=ghJ2OL4o4FA}
+    \item Allen, J. F. (1983). Maintaining Knowledge about Temporal Intervals. Communications of the ACM, 26(11), 832-843.
+    \item Prior, A. N. (1957). Time and Modality. Oxford University Press.
+
+\end{enumerate}
+
+\end{document}
