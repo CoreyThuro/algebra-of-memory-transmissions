@@ -18,16 +18,15 @@ jobs:
       run: |
         pdflatex main.tex
 
-    - name: Move compiled PDF to docs directory and create .nojekyll file
+    - name: Move compiled PDF to root directory and create .nojekyll file
       run: |
-        mkdir -p docs
-        mv main.pdf docs/index.pdf
-        touch docs/.nojekyll
+        mv main.pdf index.pdf
+        touch .nojekyll
 
     - name: Commit and push the PDF to main branch
       run: |
         git config --global user.name "github-actions[bot]"
         git config --global user.email "github-actions[bot]@users.noreply.github.com"
-        git add docs/index.pdf docs/.nojekyll
-        git commit -m "Publish compiled PDF to docs directory"
+        git add index.pdf .nojekyll
+        git commit -m "Publish compiled PDF to root directory"
         git push origin main
