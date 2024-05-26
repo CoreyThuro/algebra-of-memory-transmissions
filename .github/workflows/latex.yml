@@ -20,14 +20,6 @@ jobs:
       run: |
         touch .nojekyll
 
-    - name: Commit .nojekyll file
-      run: |
-        git config --global user.name "github-actions[bot]"
-        git config --global user.email "github-actions[bot]@users.noreply.github.com"
-        git add .nojekyll
-        git commit -m "Add .nojekyll file to disable Jekyll"
-        git push origin main
-
     - name: Set up TeX Live
       run: |
         sudo apt-get update
@@ -42,10 +34,13 @@ jobs:
       run: |
         mv main.pdf index.pdf
 
-    - name: Commit and push the PDF to main branch
+    - name: Prepare output files
       run: |
-        git config --global user.name "github-actions[bot]"
-        git config --global user.email "github-actions[bot]@users.noreply.github.com"
-        git add index.pdf
-        git commit -m "Publish compiled PDF to root directory"
-        git push origin main
+        cp index.pdf ${GITHUB_WORKSPACE}/
+        cp .nojekyll ${GITHUB_WORKSPACE}/
+
+    - name: Deploy to GitHub Pages
+      uses: peaceiris/actions-gh-pages@v3
+      with:
+        github_token: ${{ secrets.GITHUB_TOKEN }}
+        publish_dir: ./ 
