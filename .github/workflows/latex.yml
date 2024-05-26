@@ -13,6 +13,7 @@ jobs:
       run: |
         sudo apt-get update
         sudo apt-get install -y texlive-full
+        sudo apt-get install -y texlive-latex-extra texlive-science texlive-publishers
 
     - name: Compile LaTeX document
       run: |
