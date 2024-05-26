@@ -24,7 +24,13 @@ jobs:
       run: |
         sudo apt-get update
         sudo apt-get install -y texlive-full
-        sudo apt-get install -y texlive-latex-extra texlive-science texlive-publishers
+
+    - name: Install Quiver package
+      run: |
+        wget http://mirrors.ctan.org/macros/latex/contrib/quiver/quiver.sty
+        sudo mkdir -p /usr/share/texlive/texmf-dist/tex/latex/quiver
+        sudo mv quiver.sty /usr/share/texlive/texmf-dist/tex/latex/quiver/
+        sudo texhash
 
     - name: Compile LaTeX document
       run: |
